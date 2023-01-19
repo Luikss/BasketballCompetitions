@@ -1,3 +1,3 @@
-# BasketballCompetitions
+# Basketball Competitions
 
 * Coming soon!
