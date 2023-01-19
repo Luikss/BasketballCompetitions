@@ -1,3 +1,3 @@
-# Korvpallivoistlused
+# BasketballCompetitions
 
-* Varsti tulekul!
+* Coming soon!
