@@ -1,1 +1,1 @@
-# Korvpalliv-istlused
+# Korvpallivoistlused
