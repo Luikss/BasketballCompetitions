@@ -44,8 +44,19 @@ app.get("/games", async (req, res) => {
     }
 })
 
-app.get("/teams", (req, res) => {
-    res.send(["Tõrva Sopsutajad", "Saaremaa Dunkers"])
+app.get("/teams", async (req, res) => {
+    let connection 
+    try {
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT name FROM teams")
+        res.send(rows)
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) {
+            return connection.end()
+        }
+    }
 })
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
