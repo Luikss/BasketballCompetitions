@@ -42,6 +42,21 @@ app.get("/players", (req, res) => {
     res.send(["Andre Luige", "Dagne Markiine Kotkas"])
 })
 
+app.get("/players/:id", async (req, res) => {
+    let connection 
+    try {
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT * FROM players WHERE id = ?", [req.params.id])
+        res.send(rows)
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) {
+            return connection.end()
+        }
+    }
+})
+
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 app.listen(port, () => {
