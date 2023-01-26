@@ -30,8 +30,19 @@ app.get("/customers", async (req, res) => {
     }
 })
 
-app.get("/games", (req, res) => {
-    res.send(["Paide Cup", "Veteranide Loivamine"])
+app.get("/games", async (req, res) => {
+    let connection 
+    try {
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT name FROM games")
+        res.send(rows)
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) {
+            return connection.end()
+        }
+    }
 })
 
 app.get("/teams", (req, res) => {
