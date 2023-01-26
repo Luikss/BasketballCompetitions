@@ -34,8 +34,19 @@ app.get("/games", (req, res) => {
     res.send(["Paide Cup", "Veteranide Loivamine"])
 })
 
-app.get("/teams", (req, res) => {
-    res.send(["Tõrva Sopsutajad", "Saaremaa Dunkers"])
+app.get("/teams", async (req, res) => {
+    let connection 
+    try {
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT name FROM teams")
+        res.send(rows)
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) {
+            return connection.end()
+        }
+    }
 })
 
 app.get("/players", (req, res) => {
