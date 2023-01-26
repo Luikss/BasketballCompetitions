@@ -14,14 +14,6 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-app.get("/games", (req, res) => {
-    res.send(["Paide Cup", "Veteranide Loivamine"])
-})
-
-app.get("/teams", (req, res) => {
-    res.send(["Tõrva Sopsutajad", "Saaremaa Dunkers"])
-})
-
 app.get("/players", async (req, res) => {
     let connection 
     try {
@@ -35,6 +27,25 @@ app.get("/players", async (req, res) => {
             return connection.end()
         }
     }
+})
+
+app.get("/games", async (req, res) => {
+    let connection 
+    try {
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT name FROM games")
+        res.send(rows)
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) {
+            return connection.end()
+        }
+    }
+})
+
+app.get("/teams", (req, res) => {
+    res.send(["Tõrva Sopsutajad", "Saaremaa Dunkers"])
 })
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
