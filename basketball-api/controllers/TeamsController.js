@@ -1,4 +1,4 @@
-const db = require("../db")
+const { db } = require("../db")
 const Team = db.teams
 
 exports.getAll = async (req, res) => {

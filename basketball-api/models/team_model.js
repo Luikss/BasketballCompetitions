@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
         homeCourt: {
             type: Sequelize.STRING,
             allowNull: false 
-        },
+        }
     })
     return Team
 }

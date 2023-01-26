@@ -8,6 +8,26 @@ module.exports = (sequelize, Sequelize) => {
         name: {
             type: Sequelize.STRING,
             allowNull: false 
+        },
+        location: {
+            type: Sequelize.STRING,
+            allowNull: true 
+        },
+        teamOneName: {
+            type: Sequelize.STRING,
+            allowNull: false 
+        },
+        teamTwoName: {
+            type: Sequelize.STRING,
+            allowNull: false 
+        },
+        teamOneScore: {
+            type: Sequelize.INTEGER,
+            allowNull: true
+        },
+        teamTwoScore: {
+            type: Sequelize.INTEGER,
+            allowNull: true 
         }
     })
     return Game

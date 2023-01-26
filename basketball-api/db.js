@@ -20,4 +20,9 @@ db.games = require("./models/game_model")(sequelize, Sequelize);
 db.teams = require("./models/team_model")(sequelize, Sequelize);
 db.players = require("./models/player_model")(sequelize, Sequelize);
 
-module.exports = db;
+async function Sync() {
+    await sequelize.sync({alter:true});
+    
+}
+
+module.exports = { db, Sync }
