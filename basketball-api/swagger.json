@@ -1,7 +1,106 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Games API",
-      "description": "### This is a Swagger UI for our Games API  \n\n### Error handling\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\n\n```\n{\n  \"error\": \"Cleartext explanation of the error that occurred\"\n}\n```\n\n### Generic API errors\nThese error responses can be returned by any of the described endpoints.\n\n| HTTP status  |  Description |\n|---|---|\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\n| 404| The requested resource can not be found or the user does not have access to the resource.\n| 5XX| A server error has occurred while processing the request."
-    }
+  "openapi": "3.0.2",
+  "info": {
+      "title": "BasketballCompetitions-API",
+      "version": "1.0.0",
+      "description": "### This is a Swagger UI for our Games API"
+  },
+  "paths": {
+      "/games": {
+          "get": {
+              "tags": [
+                  "games"
+              ],
+              "responses": {
+                  "200": {
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "type": "string"
+                                  }
+                              },
+                              "examples": {
+                                  "List of games": {
+                                      "value": [
+                                          "Paide Cup",
+                                          "Veteranide Loivamine"
+                                      ]
+                                  }
+                              }
+                          }
+                      },
+                      "description": "Returns a list of games"
+                  }
+              },
+              "summary": "Get a list of all games",
+              "description": "Returns a list of all games in API"
+          }
+      },
+      "/players": {
+          "get": {
+              "tags": [
+                  "players"
+              ],
+              "responses": {
+                  "200": {
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "type": "string"
+                                  }
+                              },
+                              "examples": {
+                                  "List of players": {
+                                      "value": [
+                                          "Andre Luige",
+                                          "Dagne Markiine Kotkas"
+                                      ]
+                                  }
+                              }
+                          }
+                      },
+                      "description": "Returns a list of players"
+                  }
+              },
+              "summary": "Get a list of all players",
+              "description": "Returns a list of all players in API"
+          }
+      },
+      "/teams": {
+          "get": {
+              "tags": [
+                  "teams"
+              ],
+              "responses": {
+                  "200": {
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "type": "string"
+                                  }
+                              },
+                              "examples": {
+                                  "List of teams": {
+                                      "value": [
+                                          "Tõrva Sopsutajad",
+                                          "Saaremaa Dunkers"
+                                      ]
+                                  }
+                              }
+                          }
+                      },
+                      "description": "Returns a list of teams"
+                  }
+              },
+              "summary": "Get a list of all teams",
+              "description": "Returns a list of all teams in API"
+          }
+      }
+  }
 }
