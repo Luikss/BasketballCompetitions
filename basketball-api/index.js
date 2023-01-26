@@ -14,12 +14,11 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-app.get("/customers", async (req, res) => {
+app.get("/players", async (req, res) => {
     let connection 
     try {
         connection = await pool.getConnection()
-        const rows = await connection.query("SELECT * FROM customers")
-        console.log(rows)
+        const rows = await connection.query("SELECT firstName, lastName FROM players")
         res.send(rows)
     } catch (error) {
         throw error
@@ -47,10 +46,6 @@ app.get("/games", async (req, res) => {
 
 app.get("/teams", (req, res) => {
     res.send(["Tõrva Sopsutajad", "Saaremaa Dunkers"])
-})
-
-app.get("/players", (req, res) => {
-    res.send(["Andre Luige", "Dagne Markiine Kotkas"])
 })
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
