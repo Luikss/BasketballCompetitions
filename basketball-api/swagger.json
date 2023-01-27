@@ -1,106 +1,120 @@
 {
-  "openapi": "3.0.2",
-  "info": {
-      "title": "BasketballCompetitions-API",
-      "version": "1.0.0",
-      "description": "### This is a Swagger UI for our Games API"
-  },
-  "paths": {
-      "/games": {
-          "get": {
-              "tags": [
-                  "games"
-              ],
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of games": {
-                                      "value": [
-                                          "Paide Cup",
-                                          "Veteranide Loivamine"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of games"
-                  }
-              },
-              "summary": "Get a list of all games",
-              "description": "Returns a list of all games in API"
-          }
-      },
-      "/players": {
-          "get": {
-              "tags": [
-                  "players"
-              ],
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of players": {
-                                      "value": [
-                                          "Andre Luige",
-                                          "Dagne Markiine Kotkas"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of players"
-                  }
-              },
-              "summary": "Get a list of all players",
-              "description": "Returns a list of all players in API"
-          }
-      },
-      "/teams": {
-          "get": {
-              "tags": [
-                  "teams"
-              ],
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of teams": {
-                                      "value": [
-                                          "Tõrva Sopsutajad",
-                                          "Saaremaa Dunkers"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of teams"
-                  }
-              },
-              "summary": "Get a list of all teams",
-              "description": "Returns a list of all teams in API"
-          }
-      }
-  }
+    "openapi": "3.0.2",
+    "info": {
+        "title": "BasketballCompetitions-API",
+        "version": "1.0.0",
+        "description": "### This is a Swagger UI for our Games API"
+    },
+    "paths": {
+        "/games": {
+            "get": {
+                "tags": [
+                    "games"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of games": {
+                                        "value": [
+                                            {
+                                                "name": "Paide Cup"
+                                            },
+                                            {
+                                                "name": "Veteranide Loivamine"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of game names"
+                    }
+                },
+                "summary": "Get a list of all game names",
+                "description": "Returns a list of all game names in API"
+            }
+        },
+        "/players": {
+            "get": {
+                "tags": [
+                    "players"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of players": {
+                                        "value": [
+                                            {
+                                                "firstName": "Dagne Markiine",
+                                                "lastName": "Kotkas"
+                                            },
+                                            {
+                                                "firstName": "Andre",
+                                                "lastName": "Luige"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of player names"
+                    }
+                },
+                "summary": "Get a list of all player names",
+                "description": "Returns a list of all player names in API"
+            }
+        },
+        "/teams": {
+            "get": {
+                "tags": [
+                    "teams"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of teams": {
+                                        "value": [
+                                            {
+                                                "name": "Saaremaa Dunkers"
+                                            },
+                                            {
+                                                "name": "Tõrva Sopsutajad"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of team names"
+                    }
+                },
+                "summary": "Get a list of all team names",
+                "description": "Returns a list of all team names in API"
+            }
+        }
+    }
 }
