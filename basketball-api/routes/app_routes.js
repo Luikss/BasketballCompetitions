@@ -12,6 +12,7 @@ module.exports = (app) => {
     //     .delete(gamesController.deleteById)
     app.route("/teams")
         .get(teamsController.getAll)
+        .post(teamsController.createNew)
     app.route("/teams/:id")
         .get(teamsController.getById)
             

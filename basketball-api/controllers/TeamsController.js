@@ -14,3 +14,7 @@ exports.getById = async (req, res) => {
     }
     res.send(teams)
 }
+exports.createNew = async (req, res) => {
+    const teams = await Team.createNew(req.body)
+    res.send(teams)
+}
