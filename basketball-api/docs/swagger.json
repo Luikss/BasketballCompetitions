@@ -7,6 +7,8 @@
     },
     "paths": {
         "/games": {
+            "summary": "Creates a game",
+            "description": "Creates a new game",
             "get": {
                 "tags": [
                     "games"
@@ -40,6 +42,58 @@
                 },
                 "summary": "Get a list of all game names",
                 "description": "Returns a list of all game names in API"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new game to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/new-game"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "games"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Location of created game": {
+                                        "value": "\"https://server:port/games/{id}\""
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Game was added"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid data": {
+                                        "value": {
+                                            "error": "Invalid input, missing required parameters"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
+                    }
+                },
+                "summary": "Add new game",
+                "description": "Add new game with all the details"
             }
         },
         "/players": {
@@ -114,6 +168,96 @@
                 },
                 "summary": "Get a list of all team names",
                 "description": "Returns a list of all team names in API"
+            }
+        },
+        "/games/{id}": {
+            "summary": "Get game details",
+            "description": "Get all the details of a game with the given id",
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given game": {
+                                        "value": "[\n    \"name\": \"Paide Cup\"\n]"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id game"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Game not found": {
+                                        "value": {
+                                            "error": "Game with the given id was not found."
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Game with the given id does not exist"
+                    }
+                },
+                "operationId": "id",
+                "summary": "Get full details of a game",
+                "description": "Returns full details of a given id game"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error message."
+                }
+            },
+            "new-game": {
+                "title": "Root Type for new-game",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "Tallinna Cup",
+                    "location": "Metsas"
+                }
             }
         }
     }
