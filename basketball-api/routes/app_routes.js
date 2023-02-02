@@ -12,6 +12,9 @@ module.exports = (app) => {
     //     .delete(gamesController.deleteById)
     app.route("/teams")
         .get(teamsController.getAll)
+    app.route("/teams/:id")
+        .get(teamsController.getById)
+            
     app.route("/players")
         .get(playersController.getAll)
 }
