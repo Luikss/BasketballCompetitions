@@ -8,5 +8,9 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     const teams = await Team.findByPk(req.params.id)
+    if(teams === null) {
+        res.status(404).send({"error": "Team not found"})
+        return
+    }
     res.send(teams)
 }
