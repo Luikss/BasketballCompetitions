@@ -1,0 +1,396 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "BasketballCompetitions-API",
+        "version": "1.0.0",
+        "description": "### This is a Swagger UI for our Games API"
+    },
+    "paths": {
+        "/games": {
+            "summary": "Creates a game",
+            "description": "Creates a new game",
+            "get": {
+                "tags": [
+                    "games"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of games": {
+                                        "value": [
+                                            {
+                                                "name": "Paide Cup"
+                                            },
+                                            {
+                                                "name": "Veteranide Loivamine"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of game names"
+                    }
+                },
+                "summary": "Get a list of all game names",
+                "description": "Returns a list of all game names in API"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new game to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/new-game"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "games"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Location of created game": {
+                                        "value": "\"https://server:port/games/{id}\""
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Game was added"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid data": {
+                                        "value": {
+                                            "error": "Invalid input, missing required parameters"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
+                    }
+                },
+                "summary": "Add new game",
+                "description": "Add new game with all the details"
+            }
+        },
+        "/players": {
+            "get": {
+                "tags": [
+                    "players"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of players": {
+                                        "value": [
+                                            {
+                                                "firstName": "Dagne Markiine",
+                                                "lastName": "Kotkas"
+                                            },
+                                            {
+                                                "firstName": "Andre",
+                                                "lastName": "Luige"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of player names"
+                    }
+                },
+                "summary": "Get a list of all player names",
+                "description": "Returns a list of all player names in API"
+            }
+        },
+        "/teams": {
+            "get": {
+                "tags": [
+                    "teams"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of teams": {
+                                        "value": [
+                                            {
+                                                "name": "Saaremaa Dunkers"
+                                            },
+                                            {
+                                                "name": "Tõrva Sopsutajad"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of team names"
+                    }
+                },
+                "summary": "Get a list of all team names",
+                "description": "Returns a list of all team names in API"
+            }
+        },
+        "/games/{id}": {
+            "summary": "Get game details",
+            "description": "Get all the details of a game with the given id",
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given game": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "Paide Cup",
+                                            "location": "Paide",
+                                            "teamOneName": "Tõrva Sopsutajad",
+                                            "teamTwoName": "Saaremaa Dunkers",
+                                            "teamOneScore": 67,
+                                            "teamTwoScore": 85
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id game"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Game was not found": {
+                                        "value": {
+                                            "error": "Game not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Game was not found in games array"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "gameId",
+                "summary": "Get full details of a game",
+                "description": "Returns full details of a given id game"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/players/{id}": {
+            "summary": "Get player details",
+            "description": "Get all the details of a player with the given id",
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given player": {
+                                        "value": {
+                                            "id": 1,
+                                            "firstName": "Dagne Markiine",
+                                            "lastName": "Kotkas",
+                                            "age": 26
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id player"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Player was not found": {
+                                        "value": {
+                                            "error": "Player not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Player was not found in games array"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "playerId",
+                "summary": "Get full details of a player",
+                "description": "Returns full details of a given id player"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/teams/{id}": {
+            "summary": "Get team details",
+            "description": "Get all the details of a team with the given id",
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given team": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "Saaremaa Dunkers",
+                                            "homeCourt": "Kuressaare saal"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id team"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Team was not found": {
+                                        "value": {
+                                            "error": "Team not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Team was not found in teams array"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "teamId",
+                "summary": "Get full details of a team",
+                "description": "Returns full details of a given id team"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error message."
+                }
+            },
+            "new-game": {
+                "title": "Root Type for new-game",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "Tallinna Cup",
+                    "location": "Metsas"
+                }
+            }
+        }
+    }
+}
