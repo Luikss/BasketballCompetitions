@@ -189,7 +189,15 @@
                                 },
                                 "examples": {
                                     "Full details of a given game": {
-                                        "value": "[\n    \"name\": \"Paide Cup\"\n]"
+                                        "value": {
+                                            "id": 1,
+                                            "name": "Paide Cup",
+                                            "location": "Paide",
+                                            "teamOneName": "Tõrva Sopsutajad",
+                                            "teamTwoName": "Saaremaa Dunkers",
+                                            "teamOneScore": 67,
+                                            "teamTwoScore": 85
+                                        }
                                     }
                                 }
                             }
@@ -203,20 +211,144 @@
                                     "$ref": "#/components/schemas/error"
                                 },
                                 "examples": {
-                                    "Game not found": {
+                                    "Game was not found": {
                                         "value": {
-                                            "error": "Game with the given id was not found."
+                                            "error": "Game not found"
                                         }
                                     }
                                 }
                             }
                         },
-                        "description": "Game with the given id does not exist"
+                        "description": "Game was not found in games array"
                     }
                 },
-                "operationId": "id",
+                "deprecated": false,
+                "operationId": "gameId",
                 "summary": "Get full details of a game",
                 "description": "Returns full details of a given id game"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/players/{id}": {
+            "summary": "Get player details",
+            "description": "Get all the details of a player with the given id",
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given player": {
+                                        "value": {
+                                            "id": 1,
+                                            "firstName": "Dagne Markiine",
+                                            "lastName": "Kotkas",
+                                            "age": 26
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id player"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Player was not found": {
+                                        "value": {
+                                            "error": "Player not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Player was not found in games array"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "playerId",
+                "summary": "Get full details of a player",
+                "description": "Returns full details of a given id player"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/teams/{id}": {
+            "summary": "Get team details",
+            "description": "Get all the details of a team with the given id",
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given team": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "Saaremaa Dunkers",
+                                            "homeCourt": "Kuressaare saal"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id team"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Team was not found": {
+                                        "value": {
+                                            "error": "Team not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Team was not found in teams array"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "teamId",
+                "summary": "Get full details of a team",
+                "description": "Returns full details of a given id team"
             },
             "parameters": [
                 {
