@@ -10,6 +10,7 @@ module.exports = (app) => {
         //.post(gamesController.create)
         //.put(gamesController.updateById)
         //.delete(gamesController.deleteById)
+
     app.route("/teams")
         .get(teamsController.getAll)
         .post(teamsController.createNew)
@@ -18,4 +19,6 @@ module.exports = (app) => {
             
     app.route("/players")
         .get(playersController.getAll)
+    app.route("/players/:id")
+        .get(playersController.getById)
 }
