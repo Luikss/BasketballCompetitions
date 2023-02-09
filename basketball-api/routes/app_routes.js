@@ -8,7 +8,8 @@ module.exports = (app) => {
         .post(gamesController.createNew)
     app.route("/games/:id")
         .get(gamesController.getById)
-        
+        .delete(gamesController.deleteById)
+
     app.route("/teams")
         .get(teamsController.getAll)
         .post(teamsController.createNew)
