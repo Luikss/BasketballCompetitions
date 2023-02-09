@@ -102,6 +102,23 @@
                             }
                         },
                         "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "summary": "Add new game",
@@ -200,6 +217,23 @@
                             }
                         },
                         "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "summary": "Add new player",
@@ -296,6 +330,23 @@
                             }
                         },
                         "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "summary": "Add new team",
