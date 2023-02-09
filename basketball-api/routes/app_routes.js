@@ -19,6 +19,7 @@ module.exports = (app) => {
             
     app.route("/players")
         .get(playersController.getAll)
+        .post(playersController.createNew)
     app.route("/players/:id")
         .get(playersController.getById)
 }
