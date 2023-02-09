@@ -5,12 +5,10 @@ const playersController = require("../controllers/PlayersController")
 module.exports = (app) => {
     app.route("/games")
         .get(gamesController.getAll)
+        .post(gamesController.createNew)
     app.route("/games/:id")
         .get(gamesController.getById)
-        //.post(gamesController.create)
-        //.put(gamesController.updateById)
-        //.delete(gamesController.deleteById)
-
+        
     app.route("/teams")
         .get(teamsController.getAll)
         .post(teamsController.createNew)

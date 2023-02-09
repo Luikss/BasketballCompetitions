@@ -32,6 +32,7 @@ exports.createNew = async (req, res) => {
     .location(`${getBaseUrl(req)}/teams/${team.id}`)
     .json(team)
 }
+
 getBaseUrl = (request) => {
   return (
     (request.connection && request.connection.encrypted ? "https" : "http") +
