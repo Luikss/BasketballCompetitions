@@ -63,11 +63,19 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/new-game"
                                 },
                                 "examples": {
-                                    "Location of created game": {
-                                        "value": "\"https://server:port/games/{id}\""
+                                    "new-game": {
+                                        "value": {
+                                            "id": 3,
+                                            "name": "Tallinna Cup",
+                                            "location": "Lauluväljak",
+                                            "teamOneName": "Sprinterid",
+                                            "teamTwoName": "Maavärin",
+                                            "teamOneScore": 66,
+                                            "teamTwoScore": 99
+                                        }
                                     }
                                 }
                             }
@@ -83,7 +91,11 @@
                                 "examples": {
                                     "Invalid data": {
                                         "value": {
-                                            "error": "Invalid input, missing required parameters"
+                                            "error": [
+                                                "game.name cannot be null",
+                                                "game.teamOneName cannot be null",
+                                                "game.teamTwoName cannot be null"
+                                            ]
                                         }
                                     }
                                 }
@@ -132,9 +144,70 @@
                 },
                 "summary": "Get a list of all player names",
                 "description": "Returns a list of all player names in API"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/new-player"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "players"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-player"
+                                },
+                                "examples": {
+                                    "new-player": {
+                                        "value": {
+                                            "id": 3,
+                                            "firstName": "Uku",
+                                            "lastName": "Suviste",
+                                            "age": 40
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Player was added"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid data": {
+                                        "value": {
+                                            "error": [
+                                                "player.firstName cannot be null",
+                                                "player.lastName cannot be null",
+                                                "player.age cannot be null"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
+                    }
+                },
+                "summary": "Add new player",
+                "description": "Add new player with all the details"
             }
         },
         "/teams": {
+            "description": "",
             "get": {
                 "tags": [
                     "teams"
@@ -168,6 +241,65 @@
                 },
                 "summary": "Get a list of all team names",
                 "description": "Returns a list of all team names in API"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new team to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/new-team"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "teams"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-team"
+                                },
+                                "examples": {
+                                    "new-team": {
+                                        "value": {
+                                            "id": 3,
+                                            "name": "Vanalinna Mürajad",
+                                            "homeCourt": "Metsas"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Team was added"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid data": {
+                                        "value": {
+                                            "error": [
+                                                "team.name cannot be null",
+                                                "team.homeCourt cannot be null"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
+                    }
+                },
+                "summary": "Add new team",
+                "description": "Add new team with all the details"
             }
         },
         "/games/{id}": {
@@ -377,18 +509,93 @@
             "new-game": {
                 "title": "Root Type for new-game",
                 "description": "",
+                "required": [
+                    "name",
+                    "teamOneName",
+                    "teamTwoName"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "location": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "teamOneName": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "teamTwoName": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "teamOneScore": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "teamTwoScore": {
+                        "description": "",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "name": "Tallinna Cup",
+                    "location": "Lauluväljak",
+                    "teamOneName": "Sprinterid",
+                    "teamTwoName": "Maavärin",
+                    "teamOneScore": 66,
+                    "teamTwoScore": 99
+                }
+            },
+            "new-team": {
+                "title": "Root Type for new-team",
+                "description": "",
+                "required": [
+                    "homeCourt",
+                    "name"
+                ],
                 "type": "object",
                 "properties": {
                     "name": {
                         "type": "string"
                     },
-                    "location": {
+                    "homeCourt": {
                         "type": "string"
                     }
                 },
                 "example": {
-                    "name": "Tallinna Cup",
-                    "location": "Metsas"
+                    "name": "Vanalinna Mürajad",
+                    "homeCourt": "Metsas"
+                }
+            },
+            "new-player": {
+                "title": "Root Type for new-player",
+                "description": "",
+                "required": [
+                    "age",
+                    "firstName",
+                    "lastName"
+                ],
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "firstName": "Uku",
+                    "lastName": "Suviste",
+                    "age": 40
                 }
             }
         }
