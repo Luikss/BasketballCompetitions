@@ -102,6 +102,23 @@
                             }
                         },
                         "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "summary": "Add new game",
@@ -200,6 +217,23 @@
                             }
                         },
                         "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "summary": "Add new player",
@@ -296,6 +330,23 @@
                             }
                         },
                         "description": "One or all params are missing"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "summary": "Add new team",
@@ -307,7 +358,7 @@
             "description": "Get all the details of a game with the given id",
             "get": {
                 "tags": [
-                    "details"
+                    "games"
                 ],
                 "responses": {
                     "200": {
@@ -359,6 +410,62 @@
                 "summary": "Get full details of a game",
                 "description": "Returns full details of a given id game"
             },
+            "delete": {
+                "tags": [
+                    "games"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Game with given id was deleted"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Game was not found": {
+                                        "value": {
+                                            "error": "Game not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Game with given id was not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Delete game",
+                "description": "Delete game with given id"
+            },
             "parameters": [
                 {
                     "name": "id",
@@ -372,7 +479,7 @@
             "description": "Get all the details of a player with the given id",
             "get": {
                 "tags": [
-                    "details"
+                    "players"
                 ],
                 "responses": {
                     "200": {
@@ -421,6 +528,62 @@
                 "summary": "Get full details of a player",
                 "description": "Returns full details of a given id player"
             },
+            "delete": {
+                "tags": [
+                    "players"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Player with given id was deleted"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Player was not found": {
+                                        "value": {
+                                            "error": "Player not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Player with given id was not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Delete player",
+                "description": "Delete player with given id"
+            },
             "parameters": [
                 {
                     "name": "id",
@@ -434,7 +597,7 @@
             "description": "Get all the details of a team with the given id",
             "get": {
                 "tags": [
-                    "details"
+                    "teams"
                 ],
                 "responses": {
                     "200": {
@@ -481,6 +644,62 @@
                 "operationId": "teamId",
                 "summary": "Get full details of a team",
                 "description": "Returns full details of a given id team"
+            },
+            "delete": {
+                "tags": [
+                    "teams"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Team with given id was deleted"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Team was not found": {
+                                        "value": {
+                                            "error": "Team not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Team with given id was not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Internal Server Error": {
+                                        "value": {
+                                            "error": "Something went wrong on our side. Sorry :("
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Delete team",
+                "description": "Delete team with given id"
             },
             "parameters": [
                 {
@@ -596,6 +815,20 @@
                     "firstName": "Uku",
                     "lastName": "Suviste",
                     "age": 40
+                }
+            },
+            "delete": {
+                "title": "Root Type for delete",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "id": 1
                 }
             }
         }
