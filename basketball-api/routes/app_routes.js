@@ -21,4 +21,5 @@ module.exports = (app) => {
         .post(playersController.createNew)
     app.route("/players/:id")
         .get(playersController.getById)
+        .delete(playersController.deleteById)
 }
