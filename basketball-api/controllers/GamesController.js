@@ -21,9 +21,9 @@ exports.createNew = async (req, res) => {
       game = await Game.create(req.body)
     } catch (error) {
       if (error instanceof db.Sequelize.ValidationError) {
-        res.status(400).send({error:error.errors.map((item)=> item.message)})
+        res.status(400).send({error: error.errors.map((item)=> item.message)})
       } else {
-        res.status(500).send({error:"Something went wrong on our side. Sorry :("})
+        res.status(500).send({error: "Something went wrong on our side. Sorry :("})
       }
       return
     }
@@ -38,16 +38,34 @@ exports.deleteById = async (req, res) => {
     try {
         result = await Game.destroy({where: {id: req.params.id}})
     } catch (error) {
-        res.status(500).send({error:"Something went wrong on our side. Sorry :("})
+        res.status(500).send({error: "Something went wrong on our side. Sorry :("})
         return
     }
     if (result === 0) {
-        res.status(404).send({error:"Game not found"})
+        res.status(404).send({error: "Game not found"})
         return
     }
     res.status(204).send()
 }
 
+exports.updateById = async (req,res) => {
+    let result
+    delete req.body.id
+    try {
+      result = await Game.update(req.body,{where: {id: req.params.id } })
+    } catch (error) {
+      res.status(500).send({error: "Something went wrong on our side. Sorry :(" })
+      return
+    }
+    if (result[0] === 0) {
+      res.status(404).send({error: "Game not found" })
+      return
+    }
+    const game = await Game.findByPk(req.params.id)
+    res.status(200)
+        .location(`${getBaseUrl(req)}/games/${game.id}`)
+        .json(game)  
+  }
   
 getBaseUrl = (request) => {
     return (
