@@ -1,6 +1,6 @@
 # Basketball Competitions
 
-## Developers: Andre Luige && Dagne Markiine Kotkas
+## Developers: Andre Luige & Dagne Markiine Kotkas
 
 ## Project setup
 
