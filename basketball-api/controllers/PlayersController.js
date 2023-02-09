@@ -48,6 +48,26 @@ exports.deleteById = async (req, res) => {
   res.status(204).send()
 }
 
+exports.updateById = async (req,res) => {
+  let result
+  delete req.body.id
+  try {
+    result = await Player.update(req.body,{where: {id: req.params.id } })
+  } catch (error) {
+    res.status(500).send({error: "Something went wrong on our side. Sorry :(" })
+    return
+  }
+  if (result[0] === 0) {
+    res.status(404).send({error: "Player not found" })
+    return
+  }
+  const player = await Player.findByPk(req.params.id)
+  res
+    .status(200)
+    .location(`${getBaseUrl(req)}/players/${player.id}`)
+    .json(player)  
+}
+
 getBaseUrl = (request) => {
   return (
     (request.connection && request.connection.encrypted ? "https" : "http") +
