@@ -17,6 +17,7 @@ module.exports = (app) => {
     app.route("/teams/:id")
         .get(teamsController.getById)
         .delete(teamsController.deleteById)
+        .put(teamsController.updateById)
             
     app.route("/players")
         .get(playersController.getAll)
