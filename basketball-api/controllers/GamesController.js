@@ -8,11 +8,24 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
   const games = await Game.findByPk(req.params.id)
-  if(games === null) {
+  if (games === null) {
       res.status(404).send({error: "Game not found"})
       return
   }
-  res.send(games)
+
+  let result = games.map( (g) => {
+    console.log(g)
+    return {
+      "id": g.game.id,
+      "name": g.game.name,
+      "location": g.game.location,
+      "teamOneName": g.team.name,
+      "teamTwoName": g.team.name,
+      "teamOneScore": g.game.teamOneScore,
+      "teamTwoScore": g.game.teamTwoScore
+    }
+  }) 
+  res.send(result)
 }
 
 exports.createNew = async (req, res) => {
