@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize, Team) => {
             allowNull: false,
             references: {
                 model: Team,
-                key: "id",
+                key: "id"
             }
         },
         teamTwoId: {
@@ -26,7 +26,7 @@ module.exports = (sequelize, Sequelize, Team) => {
             allowNull: false,
             references: {
                 model: Team,
-                key: "id",
+                key: "id"
             }
         },
         teamOneScore: {
@@ -39,9 +39,14 @@ module.exports = (sequelize, Sequelize, Team) => {
         }
     })
 
-    Team.belongsToMany(Game, { through: Game })
-    Team.hasMany(Game)
-    Game.belongsTo(Team)
+    Game.hasMany(Team, {
+        foreignKey: 'id',
+        as: 'teamOne'
+    })
+    Game.hasMany(Team, {
+        foreignKey: 'id',
+        as: 'teamTwo'
+    })
 
     return Game
 }
