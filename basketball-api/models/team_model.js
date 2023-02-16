@@ -15,8 +15,5 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false 
         }
     })
-
-    // has many players
-
     return Team
 }
