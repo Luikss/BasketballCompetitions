@@ -27,9 +27,11 @@
                                     "List of games": {
                                         "value": [
                                             {
+                                                "id": 1,
                                                 "name": "Paide Cup"
                                             },
                                             {
+                                                "id": 2,
                                                 "name": "Veteranide Loivamine"
                                             }
                                         ]
@@ -68,6 +70,7 @@
                                 "examples": {
                                     "new-game": {
                                         "value": {
+                                            "id": "1",
                                             "name": "Tallinna cup",
                                             "location": "Lauluväljak",
                                             "teamOneScore": 47,
@@ -143,10 +146,12 @@
                                     "List of players": {
                                         "value": [
                                             {
+                                                "id": 1,
                                                 "firstName": "Dagne Markiine",
                                                 "lastName": "Kotkas"
                                             },
                                             {
+                                                "id": 2,
                                                 "firstName": "Andre",
                                                 "lastName": "Luige"
                                             }
@@ -259,9 +264,11 @@
                                     "List of teams": {
                                         "value": [
                                             {
+                                                "id": 1,
                                                 "name": "Saaremaa Dunkers"
                                             },
                                             {
+                                                "id": 2,
                                                 "name": "Tõrva Sopsutajad"
                                             }
                                         ]
