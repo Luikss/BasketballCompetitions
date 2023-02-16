@@ -49,7 +49,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/game"
+                                "$ref": "#/components/schemas/game-post"
                             }
                         }
                     },
@@ -63,18 +63,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/game"
+                                    "$ref": "#/components/schemas/game-post"
                                 },
                                 "examples": {
                                     "new-game": {
                                         "value": {
-                                            "id": 3,
-                                            "name": "Tallinna Cup",
+                                            "name": "Tallinna cup",
                                             "location": "Lauluväljak",
-                                            "teamOneName": "Sprinterid",
-                                            "teamTwoName": "Maavärin",
-                                            "teamOneScore": 66,
-                                            "teamTwoScore": 99
+                                            "teamOneScore": 47,
+                                            "teamTwoScore": 39,
+                                            "teamOneId": 32,
+                                            "teamTwoId": 29
                                         }
                                     }
                                 }
@@ -93,8 +92,8 @@
                                         "value": {
                                             "error": [
                                                 "game.name cannot be null",
-                                                "game.teamOneName cannot be null",
-                                                "game.teamTwoName cannot be null"
+                                                "game.teamOneId cannot be null",
+                                                "game.teamTwoId cannot be null"
                                             ]
                                         }
                                     }
@@ -415,7 +414,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/game"
+                                "$ref": "#/components/schemas/game-post"
                             }
                         }
                     },
@@ -439,18 +438,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/game"
+                                    "$ref": "#/components/schemas/game-post"
                                 },
                                 "examples": {
                                     "Game was updated": {
                                         "value": {
-                                            "id": 1,
-                                            "name": "Tallinna Cup",
+                                            "name": "Tallinna cup",
                                             "location": "Lauluväljak",
-                                            "teamOneName": "Sprinterid",
-                                            "teamTwoName": "Maavärin",
-                                            "teamOneScore": 66,
-                                            "teamTwoScore": 99
+                                            "teamOneScore": 41,
+                                            "teamTwoScore": 85,
+                                            "teamOneId": 83,
+                                            "teamTwoId": 97
                                         }
                                     }
                                 }
@@ -990,50 +988,6 @@
                     "id": 1
                 }
             },
-            "game": {
-                "title": "Root Type for game",
-                "description": "",
-                "required": [
-                    "name",
-                    "teamOneName",
-                    "teamTwoName"
-                ],
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "description": "",
-                        "type": "string"
-                    },
-                    "location": {
-                        "description": "",
-                        "type": "string"
-                    },
-                    "teamOneName": {
-                        "description": "",
-                        "type": "string"
-                    },
-                    "teamTwoName": {
-                        "description": "",
-                        "type": "string"
-                    },
-                    "teamOneScore": {
-                        "description": "",
-                        "type": "integer"
-                    },
-                    "teamTwoScore": {
-                        "description": "",
-                        "type": "integer"
-                    }
-                },
-                "example": {
-                    "name": "Tallinna Cup",
-                    "location": "Lauluväljak",
-                    "teamOneName": "Sprinterid",
-                    "teamTwoName": "Maavärin",
-                    "teamOneScore": 66,
-                    "teamTwoScore": 99
-                }
-            },
             "player": {
                 "title": "Root Type for player",
                 "description": "",
@@ -1080,6 +1034,94 @@
                 "example": {
                     "name": "Vanalinna Mürajad",
                     "homeCourt": "Metsas"
+                }
+            },
+            "game-post": {
+                "title": "Root Type for game",
+                "description": "",
+                "required": [
+                    "name",
+                    "teamOneId",
+                    "teamTwoId"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "location": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "teamOneScore": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "teamTwoScore": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "teamOneId": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "teamTwoId": {
+                        "description": "",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "name": "Tallinna Cup",
+                    "location": "Lauluväljak",
+                    "teamOneId": 1,
+                    "teamTwoId": 2,
+                    "teamOneScore": 66,
+                    "teamTwoScore": 99
+                }
+            },
+            "game-get": {
+                "title": "Root Type for game",
+                "description": "",
+                "required": [
+                    "name",
+                    "teamOneName",
+                    "teamTwoName"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "location": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "teamOneScore": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "teamTwoScore": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "teamOneName": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "teamTwoName": {
+                        "description": "",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "Tallinna Cup",
+                    "location": "Lauluväljak",
+                    "teamOneName": "Sprinterid",
+                    "teamTwoName": "Saaremaa sopsutajad",
+                    "teamOneScore": 66,
+                    "teamTwoScore": 99
                 }
             }
         }

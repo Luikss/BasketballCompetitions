@@ -39,12 +39,20 @@ module.exports = (sequelize, Sequelize, Team) => {
         }
     })
 
-    Game.hasMany(Team, {
-        foreignKey: 'id',
+    Team.hasMany(Game, {
+        foreignKey: 'teamOneId',
         as: 'teamOne'
     })
-    Game.hasMany(Team, {
-        foreignKey: 'id',
+    Team.hasMany(Game, {
+        foreignKey: 'teamTwoId',
+        as: 'teamTwo'
+    })
+    Game.belongsTo(Team, {
+        foreignKey: 'teamOneId',
+        as: 'teamOne'
+    })
+    Game.belongsTo(Team, {
+        foreignKey: 'teamTwoId',
         as: 'teamTwo'
     })
 
