@@ -16,13 +16,12 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.games = require("./models/game_model")(sequelize, Sequelize);
-db.teams = require("./models/team_model")(sequelize, Sequelize);
 db.players = require("./models/player_model")(sequelize, Sequelize);
+db.teams = require("./models/team_model")(sequelize, Sequelize);
+db.games = require("./models/game_model")(sequelize, Sequelize, db.teams);
 
 async function Sync() {
     await sequelize.sync({alter:true});
-    
 }
 
 module.exports = { db, Sync }

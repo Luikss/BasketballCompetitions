@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize, Team) => {
     const Game = sequelize.define("game", {
         id: {
             type: Sequelize.INTEGER,
@@ -13,13 +13,21 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: true 
         },
-        teamOneName: {
-            type: Sequelize.STRING,
-            allowNull: false 
+        teamOneId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: Team,
+                key: "id"
+            }
         },
-        teamTwoName: {
-            type: Sequelize.STRING,
-            allowNull: false 
+        teamTwoId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: Team,
+                key: "id"
+            }
         },
         teamOneScore: {
             type: Sequelize.INTEGER,
@@ -30,5 +38,23 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: true 
         }
     })
+
+    Team.hasMany(Game, {
+        foreignKey: 'teamOneId',
+        as: 'teamOne'
+    })
+    Team.hasMany(Game, {
+        foreignKey: 'teamTwoId',
+        as: 'teamTwo'
+    })
+    Game.belongsTo(Team, {
+        foreignKey: 'teamOneId',
+        as: 'teamOne'
+    })
+    Game.belongsTo(Team, {
+        foreignKey: 'teamTwoId',
+        as: 'teamTwo'
+    })
+
     return Game
 }

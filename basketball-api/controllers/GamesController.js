@@ -2,17 +2,44 @@ const { db } = require("../db")
 const Game = db.games
 
 exports.getAll = async (req, res) => {
-  const games = await Game.findAll({attributes:["name"]})
-  res.send(games)
+  const games = await Game.findAll({
+    include: { all: true }
+  })
+
+  let result = []
+  result = games.map( (g) => {
+    return {
+        "id": g.dataValues.id,
+        "name": g.dataValues.name
+    }
+  })
+  res.send(result)
 }
 
 exports.getById = async (req, res) => {
-  const games = await Game.findByPk(req.params.id)
-  if(games === null) {
+  const game = await Game.findByPk(req.params.id, {
+    include: { all: true }
+  })
+
+  if (game === null) {
       res.status(404).send({error: "Game not found"})
       return
   }
-  res.send(games)
+
+  let games = [game]
+  let result = []
+  result = games.map( (g) => {
+    return {
+        "id": g.dataValues.id,
+        "name": g.dataValues.name,
+        "location": g.dataValues.location,
+        "teamOneName": g.dataValues.teamOne.dataValues.name,
+        "teamTwoName": g.dataValues.teamTwo.dataValues.name,
+        "teamOneScore": g.dataValues.teamOneScore,
+        "teamTwoScore": g.dataValues.teamTwoScore
+    }
+  })
+  res.send(result)
 }
 
 exports.createNew = async (req, res) => {

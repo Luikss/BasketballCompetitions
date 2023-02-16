@@ -7,7 +7,8 @@ module.exports = (sequelize, Sequelize) => {
         },
         name: {
             type: Sequelize.STRING,
-            allowNull: false 
+            allowNull: false,
+            unique: true
         },
         homeCourt: {
             type: Sequelize.STRING,
