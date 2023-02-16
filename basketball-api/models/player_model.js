@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize, Team) => {
     const Player = sequelize.define("player", {
         id: {
             type: Sequelize.INTEGER,
@@ -16,7 +16,19 @@ module.exports = (sequelize, Sequelize) => {
         age: {
             type: Sequelize.INTEGER,
             allowNull: false 
+        },
+        teamId: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            references: {
+                model: Team,
+                key: "id"
+            }
         }
     })
+
+    Team.hasMany(Player)
+    Player.belongsTo(Team)
+
     return Player
 }

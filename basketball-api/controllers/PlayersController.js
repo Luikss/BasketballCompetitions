@@ -7,7 +7,10 @@ exports.getAll = async (req, res) => {
 }
 
 exports.getById = async (req, res) => {
-  const player = await Player.findByPk(req.params.id)
+  const player = await Player.findByPk(req.params.id, {
+    include: { all: true }
+  })
+  
   if(player === null) {
     res.status(404).send({error: "Player not found"})
     return
