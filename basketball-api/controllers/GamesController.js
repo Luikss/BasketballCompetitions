@@ -9,7 +9,8 @@ exports.getAll = async (req, res) => {
   let result = []
   result = games.map( (g) => {
     return {
-        "name": g.dataValues.name,
+        "id": g.dataValues.id,
+        "name": g.dataValues.name
     }
   })
   res.send(result)

@@ -2,7 +2,7 @@ const { db } = require("../db")
 const Player = db.players
 
 exports.getAll = async (req, res) => {
-  const players = await Player.findAll({attributes:["firstName","lastName"]})
+  const players = await Player.findAll({attributes:["id","firstName","lastName"]})
   res.send(players)
 }
 
