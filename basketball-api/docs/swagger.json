@@ -191,6 +191,7 @@
                                     "new-player": {
                                         "value": {
                                             "id": 3,
+                                            "teamId": 1,
                                             "firstName": "Uku",
                                             "lastName": "Suviste",
                                             "age": 40
@@ -588,7 +589,13 @@
                                             "id": 1,
                                             "firstName": "Dagne Markiine",
                                             "lastName": "Kotkas",
-                                            "age": 26
+                                            "age": 26,
+                                            "teamId": 1,
+                                            "team": {
+                                                "id": 1,
+                                                "name": "Saaremaa Dunkers",
+                                                "homeCourt": "Kuressaare saal"
+                                            }
                                         }
                                     }
                                 }
@@ -654,6 +661,7 @@
                                     "Player was updated": {
                                         "value": {
                                             "id": 3,
+                                            "teamId": 1,
                                             "firstName": "Uku",
                                             "lastName": "Suviste",
                                             "age": 40
@@ -1014,12 +1022,17 @@
                     "age": {
                         "format": "int32",
                         "type": "integer"
+                    },
+                    "teamId": {
+                        "description": "",
+                        "type": "integer"
                     }
                 },
                 "example": {
                     "firstName": "Uku",
                     "lastName": "Suviste",
-                    "age": 40
+                    "age": 40,
+                    "teamId": 1
                 }
             },
             "team": {
