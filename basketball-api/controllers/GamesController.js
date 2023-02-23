@@ -49,6 +49,8 @@ exports.createNew = async (req, res) => {
   } catch (error) {
     if (error instanceof db.Sequelize.ValidationError) {
       res.status(400).send({error: error.errors.map((item)=> item.message)})
+    } else if (error instanceof db.Sequelize.ForeignKeyConstraintError) {
+      res.status(400).send({"error":`Table:${error.table} does not contain row with id:${error.value}`})
     } else {
       res.status(500).send({error: "Something went wrong on our side. Sorry :("})
     }
