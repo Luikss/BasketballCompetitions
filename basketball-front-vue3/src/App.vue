@@ -1,15 +1,12 @@
 <template>
   <div>
-    <table border="1">
-      <caption>Kõik mängud</caption>
-      <tr>
-        <th>Nimi</th>
-      </tr>
-      <tr v-for="game in games" :key="game.id">
-        <td>{{ game.name }}</td>
-        <td><button @click="gameDetailId = game.id">Kuva detailid</button></td>
-      </tr>
-    </table>
+    <table-template 
+      caption="ALL GAMES" 
+      :items="games" 
+      :showControls="true" 
+      @show="gameDetailId = $event.id"
+    >
+    </table-template>
   </div>
   <Teleport to="body">
     <modal :show="showModal" @close="showModal = false">
@@ -29,10 +26,12 @@
 
 <script>
 import Modal from "./components/Modal.vue"
+import TableTemplate from "./components/Table.vue"
 
 export default {
   components: {
-    Modal
+    Modal,
+    TableTemplate
   },
   data() {
     return {
