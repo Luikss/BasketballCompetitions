@@ -1,18 +1,29 @@
+<template>
+  <div>
+    <table border="1">
+      <caption>Kõik mängud</caption>
+      <tr>
+        <th>Nimi</th>
+      </tr>
+      <tr v-for="game in games" :key="game.id">
+        <td>{{ game.name }}</td>
+      </tr>
+    </table>
+  </div>
+</template>
+
 <script>
 export default {
   data() {
     return {
-      msg: "Hello World"
+      games: []
     }
+  },
+  async created() {
+    this.games = await (await fetch("http://localhost:8080/games")).json()
   }
 }
 </script>
-
-<template>
-  <div>
-    {{ msg }}
-  </div>
-</template>
 
 <style scoped>
 header {
