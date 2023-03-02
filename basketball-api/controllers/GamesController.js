@@ -39,7 +39,7 @@ exports.getById = async (req, res) => {
         "teamTwoScore": g.dataValues.teamTwoScore
     }
   })
-  res.send(result)
+  res.send(result[0])
 }
 
 exports.createNew = async (req, res) => {
