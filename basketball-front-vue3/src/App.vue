@@ -9,7 +9,7 @@
     </table-template>
   </div>
   <Teleport to="body">
-    <modal :show="showModal" @close="showModal = false">
+    <modal :show="gameDetailId != 0" @close="gameDetailId = 0">
       <template #header>
         <h3>Mängu üksikasjad</h3>
       </template>
@@ -36,7 +36,6 @@ export default {
   data() {
     return {
       games: [],
-      showModal: false,
       gameDetailId: 0,
       currentGame: {}
     }
@@ -46,8 +45,10 @@ export default {
   },
   watch: {
     async gameDetailId(newId) {
+      if (newId == 0) {
+        return
+      }
       this.currentGame = await (await fetch(`http://localhost:8080/games/${newId}`)).json()
-      this.showModal = true
     }
   }
 }
