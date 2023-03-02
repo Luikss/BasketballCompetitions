@@ -7,7 +7,7 @@
       </tr>
       <tr v-for="game in games" :key="game.id">
         <td>{{ game.name }}</td>
-        <td><button @click="showModal = true">Kuva detailid</button></td>
+        <td><button @click="gameDetailId = game.id">Kuva detailid</button></td>
       </tr>
     </table>
   </div>
@@ -38,19 +38,18 @@ export default {
     return {
       games: [],
       showModal: false,
-      currentGame: {
-        id: 1,
-        name: "Tallinna Cup",
-        location: "Lauluväljak",
-        teamOneName: "Saaremaa Dunkers",
-        teamTwoName: "Vanalinna Mürajad",
-        teamOneScore: 67,
-        teamTwoScore: 99
-      }
+      gameDetailId: 0,
+      currentGame: {}
     }
   },
   async created() {
     this.games = await (await fetch("http://localhost:8080/games")).json()
+  },
+  watch: {
+    async gameDetailId(newId) {
+      this.currentGame = await (await fetch(`http://localhost:8080/games/${newId}`)).json()
+      this.showModal = true
+    }
   }
 }
 </script>
