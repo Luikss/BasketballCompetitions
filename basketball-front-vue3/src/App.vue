@@ -8,48 +8,29 @@
     >
     </table-template>
   </div>
-  <Teleport to="body">
-    <modal :show="gameDetailId != 0" @close="gameDetailId = 0">
-      <template #header>
-        <h3>Mängu üksikasjad</h3>
-      </template>
-      <template #body>
-        <b>Nimi: </b>{{ currentGame.name }}<br>
-        <b>Asukoht: </b>{{ currentGame.location }}<br><br>
-        {{ currentGame.teamOneName }} 
-        ({{ currentGame.teamOneScore }} - {{ currentGame.teamTwoScore }}) 
-        {{ currentGame.teamTwoName }}
-      </template>
-    </modal>
-  </Teleport>
+  <game-details 
+    :gameDetailId="gameDetailId" 
+    @close="gameDetailId = 0">
+  </game-details>
 </template>
 
 <script>
-import Modal from "./components/Modal.vue"
 import TableTemplate from "./components/Table.vue"
+import GameDetails from "./components/GameDetails.vue"
 
 export default {
   components: {
-    Modal,
-    TableTemplate
+    TableTemplate,
+    GameDetails
   },
   data() {
     return {
       games: [],
-      gameDetailId: 0,
-      currentGame: {}
+      gameDetailId: 0
     }
   },
   async created() {
     this.games = await (await fetch("http://localhost:8080/games")).json()
-  },
-  watch: {
-    async gameDetailId(newId) {
-      if (newId == 0) {
-        return
-      }
-      this.currentGame = await (await fetch(`http://localhost:8080/games/${newId}`)).json()
-    }
   }
 }
 </script>
