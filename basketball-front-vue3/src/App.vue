@@ -1,16 +1,27 @@
 <template>
-  <div>
-    <table-template 
-      caption="ALL GAMES" 
-      :items="games" 
-      :showControls="true" 
+  <div class="game-table">
+    <table-template
+      caption="UPCOMING GAMES"
+      notFound="No games found!"
+      :items="upcomingGames"
+      :showControls="true"
+      @show="gameDetailId = $event.id"
+    >
+    </table-template>
+  </div>
+  <div class="game-table">
+    <table-template
+      caption="PAST GAMES"
+      notFound="No games found!"
+      :items="pastGames"
+      :showControls="true"
       @show="gameDetailId = $event.id"
     >
     </table-template>
   </div>
   <game-details 
-    :gameDetailId="gameDetailId" 
-    @close="gameDetailId = 0">
+    :gameDetailId="gameDetailId"
+    @close="gameDetailId = 0"> 
   </game-details>
 </template>
 
@@ -21,24 +32,39 @@ import GameDetails from "./components/GameDetails.vue"
 export default {
   components: {
     TableTemplate,
-    GameDetails
+    GameDetails,
   },
   data() {
     return {
-      games: [],
-      gameDetailId: 0
-    }
+      upcomingGames: [],
+      pastGames: [],
+      gameDetailId: 0,
+    };
   },
   async created() {
-    this.games = await (await fetch("http://localhost:8080/games")).json()
-  }
-}
+    const gamesData = await (await fetch("http://localhost:8080/games")).json();
+
+    gamesData.forEach(async (element) => {
+      const game = await (await fetch(`http://localhost:8080/games/${element.id}`)).json();
+
+      if (game.teamOneScore && game.teamTwoScore) {
+        this.pastGames.push(element);
+      } else {
+        this.upcomingGames.push(element);
+      }
+    });
+  },
+};
 </script>
 
 <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+.game-table {
+  padding: 1rem;
 }
 
 .logo {
