@@ -1,13 +1,16 @@
 <template>
     <table>
         <caption>{{ caption }}</caption>
-        <tr>
+        <tr v-if="items.length">
             <th v-for="(keyName, index) in keyNames" :key="index">
                 {{ keyName }}
             </th>
             <th v-if="showControls"></th>
             <slot name="additionalHeaders"></slot>
         </tr>
+
+        <tr class="empty" v-if="!items.length">{{ notFound }}</tr>
+        
         <tr v-for="item in items" :key="item.id">
             <td v-for="(keyName, index) in Object.keys(item)" :key="index">
                 {{ item[keyName] }}
@@ -24,6 +27,7 @@
 export default {
     props: {
         caption: String,
+        notFound: String,
         items: Array,
         showControls: Boolean
     },
@@ -40,6 +44,11 @@ table {
   width: 100%;
   max-width: 800px;
   margin: auto;
+}
+
+.empty {
+  text-align: center;
+  font-weight: bold;
 }
 
 caption {
