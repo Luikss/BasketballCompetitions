@@ -77,7 +77,7 @@ tr:nth-child(even) {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #4d82c7;
   border: none;
   color: white;
   padding: 8px 16px;
