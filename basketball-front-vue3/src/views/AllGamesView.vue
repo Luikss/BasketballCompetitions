@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="game-table">
       <table-template
         caption="UPCOMING GAMES"
@@ -23,7 +24,8 @@
       :gameDetailId="gameDetailId"
       @close="gameDetailId = 0"> 
     </game-details>
-  </template>
+  </div>
+</template>
   
   <script>
   import TableTemplate from "../components/Table.vue"
