@@ -60,13 +60,10 @@
   </script>
   
   <style scoped>
-  header {
-    line-height: 1.5;
-    max-height: 100vh;
-  }
   
   .game-table {
     padding: 1rem;
+    max-width: 50%;
   }
   
   .logo {
@@ -118,9 +115,7 @@
   
     nav {
       text-align: left;
-      margin-left: -1rem;
       font-size: 1rem;
-  
       padding: 1rem 0;
       margin-top: 1rem;
     }

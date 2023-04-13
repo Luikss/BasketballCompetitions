@@ -41,7 +41,7 @@ export default {
 <style>
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
   max-width: 800px;
   margin: auto;
 }
@@ -70,6 +70,7 @@ td {
   border: 1px solid #ddd;
   padding: 8px;
   vertical-align: middle;
+  text-align: center;
 }
 
 tr:nth-child(even) {
