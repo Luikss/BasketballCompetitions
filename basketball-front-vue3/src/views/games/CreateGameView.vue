@@ -27,9 +27,7 @@
         <div class="col-75">
           <select v-model="teamOneId" required>
             <option disabled value="">Select Team 1</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option v-for="team in teams" v-bind:key="team.id" :value="team.id">{{ team.name }}</option>
           </select>
         </div>
       </div>
@@ -40,10 +38,8 @@
         </div>
         <div class="col-75">
           <select v-model="teamTwoId" required>
-            <option disabled value="">Select Team 1</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option disabled value="">Select Team 2</option>
+            <option v-for="team in teams" v-bind:key="team.id" :value="team.id">{{ team.name }}</option>
           </select>
         </div>
       </div>
@@ -69,6 +65,7 @@
       <br>
       <div class="row">
         <input type="submit" value="Create" />
+        <input type="button" value="Back" class="back" @click="goBack">
       </div>
     </form>
   </div>
@@ -86,10 +83,17 @@ export default {
       teamTwoId: null,
       teamOneScore: null,
       teamTwoScore: null,
-      error: null
+      error: null,
+      teams: []
     };
   },
+  async created() {
+    this.teams = await (await fetch("http://localhost:8080/teams")).json();
+  },
   methods: {
+    goBack() {
+      window.history.back();
+    },
     formSubmitHandler() {
         this.error = null
         const newGame = {
@@ -141,6 +145,7 @@ label {
   display: inline-block;
 }
 
+input[type="button"],
 input[type="submit"] {
   background-color: #4d82c7;
   color: white;
@@ -151,8 +156,13 @@ input[type="submit"] {
   float: right;
 }
 
+input[type="button"]:hover,
 input[type="submit"]:hover {
   background-color: #45a049;
+}
+
+input[type="button"] {
+  margin-right: 5px;
 }
 
 .container {
