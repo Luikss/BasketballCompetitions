@@ -1,5 +1,6 @@
 <template>
   <div>
+    <RouterLink to="/createGame">Create new game</RouterLink>
     <div class="game-table">
       <table-template
         caption="UPCOMING GAMES"
@@ -28,13 +29,15 @@
 </template>
   
   <script>
-  import TableTemplate from "../components/Table.vue"
-  import GameDetails from "../components/GameDetails.vue"
+  import TableTemplate from "../../components/Table.vue"
+  import GameDetails from "../../components/GameDetails.vue"
+  import { RouterLink } from "vue-router"
   
   export default {
     components: {
       TableTemplate,
       GameDetails,
+      RouterLink
     },
     data() {
       return {
