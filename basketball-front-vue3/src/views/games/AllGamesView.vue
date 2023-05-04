@@ -91,7 +91,7 @@
   };
   </script>
   
-  <style scoped>
+<style scoped>
   
   .game-table {
     padding: 1rem;
@@ -152,5 +152,5 @@
       margin-top: 1rem;
     }
   }
-  </style>
+</style>
   
