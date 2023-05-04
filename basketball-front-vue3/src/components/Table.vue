@@ -43,7 +43,7 @@ export default {
 <style>
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
   max-width: 800px;
   margin: auto;
 }
@@ -72,6 +72,7 @@ td {
   border: 1px solid #ddd;
   padding: 8px;
   vertical-align: middle;
+  text-align: center;
 }
 
 tr:nth-child(even) {
@@ -79,7 +80,7 @@ tr:nth-child(even) {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #4d82c7;
   border: none;
   color: white;
   padding: 8px 16px;

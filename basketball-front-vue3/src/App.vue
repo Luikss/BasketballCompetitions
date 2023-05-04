@@ -4,9 +4,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <img alt="logo" class="logo" src="@/assets/basketball.png" width="250" height="200" />
-
     <div class="wrapper">
+      <img alt="logo" class="logo" src="@/assets/basketball.png" />
       <nav>
         <RouterLink to="/">Games</RouterLink>
         <RouterLink to="/players">Players</RouterLink>
@@ -23,15 +22,19 @@ header {
   line-height: 1.5;
   max-height: 100vh;
 }
+.wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+  height: 6rem;
+  width: 6rem;
 }
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
 }
 nav a.router-link-exact-active {
   color: var(--color-text);
@@ -40,7 +43,6 @@ nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
 nav a {
-  display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
 }
@@ -63,8 +65,7 @@ nav a:first-of-type {
   }
   nav {
     text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+    font-size: 1.4rem;
     padding: 1rem 0;
     margin-top: 1rem;
   }
