@@ -1,6 +1,6 @@
 <template>
     <div>
-        <RouterLink to="/createPlayer">Create new Player</RouterLink>
+        <RouterLink to="/createPlayer">Create new player</RouterLink>
         <div class="player-table">
             <table-template
             caption="PLAYERS"
