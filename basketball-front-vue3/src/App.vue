@@ -7,9 +7,9 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="wrapper">
       <img alt="logo" class="logo" src="@/assets/basketball.png" />
       <nav>
+        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/">Games</RouterLink>
         <RouterLink to="/players">Players</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
