@@ -7,36 +7,44 @@
             notFound="No players found!"
             :items="players"
             :showControls="true"
+            @show="playerDetailId = $event.id"
             @delete="playerToDelete = $event">
             </table-template>
         </div>
-        <modal :show="JSON.stringify(playerToDelete) !== '{}'">
-            <template #header>
-                <h3>Deleting player</h3>
-            </template>
-            <template #body>
-                <p>Are you sure that you want to delete this player?</p>
-            </template>
-            <template #footer>
-                <button class="modal-default-button" @click="playerToDelete = {}">No</button>
-                <button class="modal-default-button" @click="deletePlayer()">Yes</button>
-            </template>
-        </modal>
+        <player-details 
+            :playerDetailId="playerDetailId"
+            @close="playerDetailId = 0"> 
+        </player-details>
     </div>
+    <modal :show="JSON.stringify(playerToDelete) !== '{}'">
+        <template #header>
+            <h3>Deleting player</h3>
+        </template>
+        <template #body>
+            <p>Are you sure that you want to delete this player?</p>
+        </template>
+        <template #footer>
+            <button class="modal-default-button" @click="playerToDelete = {}">No</button>
+            <button class="modal-default-button" @click="deletePlayer()">Yes</button>
+        </template>
+    </modal>
 </template>
     
 <script>
     import TableTemplate from "../../components/Table.vue"
     import Modal from "../../components/Modal.vue"
+    import PlayerDetails from "../../components/PlayerDetails.vue"
     
     export default {
       components: {
         TableTemplate,
-        Modal
+        Modal,
+        PlayerDetails
       },
       data() {
         return {
           players: [],
+          playerDetailId: 0,
           playerToDelete: {}
         };
       },
