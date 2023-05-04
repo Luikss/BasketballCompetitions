@@ -95,7 +95,7 @@
   
   .game-table {
     padding: 1rem;
-    max-width: 50%;
+    max-width: 100%;
   }
   
   .logo {
