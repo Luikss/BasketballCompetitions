@@ -18,7 +18,7 @@
             </td>
             <td v-if="showControls">
                 <button @click="$emit('show',item)">Show</button>
-                <button @click="$emit('delete', item)">Delete</button>
+                <button class="delete" @click="$emit('delete', item)">Delete</button>
             </td>
             <slot name="additionalColumns"></slot>
         </tr>
@@ -52,6 +52,10 @@ table {
 .empty {
   text-align: center;
   font-weight: bold;
+}
+
+.delete {
+  background-color: red;
 }
 
 caption {

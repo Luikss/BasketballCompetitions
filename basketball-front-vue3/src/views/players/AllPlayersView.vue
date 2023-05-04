@@ -24,7 +24,7 @@
             <p>Are you sure that you want to delete this player?</p>
         </template>
         <template #footer>
-            <button class="modal-default-button" @click="playerToDelete = {}">No</button>
+            <button class="modal-default-button delete" @click="playerToDelete = {}">No</button>
             <button class="modal-default-button" @click="deletePlayer()">Yes</button>
         </template>
     </modal>
@@ -74,6 +74,10 @@
     
     .player-table {
       padding: 1rem;
+    }
+
+    .delete {
+        background-color: red;
     }
     
     .logo {
