@@ -1,5 +1,6 @@
 <template>
   <div>
+    <RouterLink to="/createGame">Create new game</RouterLink>
     <div class="game-table">
       <table-template
         caption="UPCOMING GAMES"
@@ -7,7 +8,7 @@
         :items="upcomingGames"
         :showControls="true"
         @show="gameDetailId = $event.id"
-      >
+        @delete="gameToDelete = $event">
       </table-template>
     </div>
     <div class="game-table">
@@ -17,7 +18,7 @@
         :items="pastGames"
         :showControls="true"
         @show="gameDetailId = $event.id"
-      >
+        @delete="gameToDelete = $event">
       </table-template>
     </div>
     <game-details 
@@ -25,22 +26,39 @@
       @close="gameDetailId = 0"> 
     </game-details>
   </div>
+  <modal :show="JSON.stringify(gameToDelete) !== '{}'">
+     <template #header>
+       <h3>Deleting game</h3>
+     </template>
+     <template #body>
+       <p>Are you sure that you want to delete this game?</p>
+     </template>
+     <template #footer>
+      <button class="modal-default-button" @click="gameToDelete = {}">No</button>
+      <button class="modal-default-button" @click="deleteGame()">Yes</button>
+     </template>
+   </modal>
 </template>
   
   <script>
-  import TableTemplate from "../components/Table.vue"
-  import GameDetails from "../components/GameDetails.vue"
+  import TableTemplate from "../../components/Table.vue"
+  import GameDetails from "../../components/GameDetails.vue"
+  import Modal from "../../components/Modal.vue";
+  import { RouterLink } from "vue-router"
   
   export default {
     components: {
       TableTemplate,
       GameDetails,
+      RouterLink,
+      Modal,
     },
     data() {
       return {
         upcomingGames: [],
         pastGames: [],
         gameDetailId: 0,
+        gameToDelete: {},
       };
     },
     async created() {
@@ -56,6 +74,20 @@
         }
       });
     },
+    methods: {
+     async deleteGame() {
+       fetch("http://localhost:8080/games/" + this.gameToDelete.id, {
+         method: "delete",
+       }).then(async (response) => {
+         if (response.status == 204) {
+           location.reload();
+         } else {
+           const data = await response.json();
+           console.log("DELETE: ", data);
+         }
+       });
+     },
+   },
   };
   </script>
   
