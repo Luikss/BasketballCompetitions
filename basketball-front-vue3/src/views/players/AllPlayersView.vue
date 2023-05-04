@@ -1,28 +1,30 @@
 <template>
-    <div>
+  <div>
+      <div class="player-table">
+          <table-template
+          caption="PLAYERS"
+          notFound="No players found!"
+          :items="players"
+          :showControls="true"
+          @delete="playerToDelete = $event">
+          </table-template>
+      </div>
+      <div class="router">
         <RouterLink to="/createPlayer">Create new player</RouterLink>
-        <div class="player-table">
-            <table-template
-            caption="PLAYERS"
-            notFound="No players found!"
-            :items="players"
-            :showControls="true"
-            @delete="playerToDelete = $event">
-            </table-template>
-        </div>
-        <modal :show="JSON.stringify(playerToDelete) !== '{}'">
-            <template #header>
-                <h3>Deleting player</h3>
-            </template>
-            <template #body>
-                <p>Are you sure that you want to delete this player?</p>
-            </template>
-            <template #footer>
-                <button class="modal-default-button" @click="playerToDelete = {}">No</button>
-                <button class="modal-default-button" @click="deletePlayer()">Yes</button>
-            </template>
-        </modal>
-    </div>
+      </div>
+      <modal :show="JSON.stringify(playerToDelete) !== '{}'">
+          <template #header>
+              <h3>Deleting player</h3>
+          </template>
+          <template #body>
+              <p>Are you sure that you want to delete this player?</p>
+          </template>
+          <template #footer>
+              <button class="modal-default-button" @click="playerToDelete = {}">No</button>
+              <button class="modal-default-button" @click="deletePlayer()">Yes</button>
+          </template>
+      </modal>
+  </div>
 </template>
     
 <script>
@@ -65,6 +67,12 @@
     max-width: 100%;
   }
   
+  .router {
+    text-transform: uppercase;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
   .logo {
     display: block;
     margin: 0 auto 2rem;
