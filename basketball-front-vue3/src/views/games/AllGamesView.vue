@@ -1,6 +1,5 @@
 <template>
   <div>
-    <RouterLink to="/createGame">Create new game</RouterLink>
     <div class="game-table">
       <table-template
         caption="UPCOMING GAMES"
@@ -25,6 +24,9 @@
       :gameDetailId="gameDetailId"
       @close="gameDetailId = 0"> 
     </game-details>
+  </div>
+  <div class="router">
+    <RouterLink to="/createGame">Create new game</RouterLink>
   </div>
   <modal :show="JSON.stringify(gameToDelete) !== '{}'">
      <template #header>
@@ -97,7 +99,12 @@
     padding: 1rem;
     max-width: 100%;
   }
-  
+  .router {
+    text-transform: uppercase;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
   .logo {
     display: block;
     margin: 0 auto 2rem;
