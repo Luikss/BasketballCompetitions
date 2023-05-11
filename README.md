@@ -8,5 +8,7 @@
 2. Open repository subfolder "basketball-api"
 2. Run command "npm i"
 3. Create new ".env" file and insert values for variables (check .env.example)
-4. Run project with command "npm start"
-5. http://localhost:8080/docs will open automatically
+4. Open repository subfolder "basketball-front-vue3"
+5. Run command "npm i"
+6. Run project in "basketball-front-vue3" subfolder with command "npm run serve"
+7. http://localhost:8080/docs and http://localhost:5173/ will open automatically
