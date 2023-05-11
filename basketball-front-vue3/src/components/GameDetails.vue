@@ -2,11 +2,13 @@
     <Teleport to="body">
     <modal :show="gameDetailId != 0" @close="$emit('close')">
       <template #header>
-        <h3>Mängu üksikasjad</h3>
+        <h3>Game Details</h3>
       </template>
       <template #body>
-        <b>Nimi: </b>{{ currentGame.name }}<br>
-        <b>Asukoht: </b>{{ currentGame.location }}<br><br>
+        <b>Name: </b>{{ currentGame.name }}<br>
+        <b>Location: </b>{{ currentGame.location }}
+        <b v-if="!currentGame.location">Unknown</b>
+        <br><br>
         {{ currentGame.teamOneName }} 
         ({{ currentGame.teamOneScore }} - {{ currentGame.teamTwoScore }}) 
         {{ currentGame.teamTwoName }}

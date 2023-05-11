@@ -36,7 +36,7 @@
        <p>Are you sure that you want to delete this game?</p>
      </template>
      <template #footer>
-      <button class="modal-default-button" @click="gameToDelete = {}">No</button>
+      <button class="modal-default-button delete" @click="gameToDelete = {}">No</button>
       <button class="modal-default-button" @click="deleteGame()">Yes</button>
      </template>
    </modal>
@@ -108,6 +108,10 @@
   .logo {
     display: block;
     margin: 0 auto 2rem;
+  }
+
+  .delete {
+    background-color: red;
   }
   
   nav {

@@ -6,73 +6,85 @@
           notFound="No players found!"
           :items="players"
           :showControls="true"
+          @show="playerDetailId = $event.id"
           @delete="playerToDelete = $event">
           </table-template>
       </div>
       <div class="router">
         <RouterLink to="/createPlayer">Create new player</RouterLink>
       </div>
-      <modal :show="JSON.stringify(playerToDelete) !== '{}'">
-          <template #header>
-              <h3>Deleting player</h3>
-          </template>
-          <template #body>
-              <p>Are you sure that you want to delete this player?</p>
-          </template>
-          <template #footer>
-              <button class="modal-default-button" @click="playerToDelete = {}">No</button>
-              <button class="modal-default-button" @click="deletePlayer()">Yes</button>
-          </template>
-      </modal>
+      <player-details 
+          :playerDetailId="playerDetailId"
+          @close="playerDetailId = 0"> 
+      </player-details>
   </div>
+  <modal :show="JSON.stringify(playerToDelete) !== '{}'">
+      <template #header>
+          <h3>Deleting player</h3>
+      </template>
+      <template #body>
+          <p>Are you sure that you want to delete this player?</p>
+      </template>
+      <template #footer>
+          <button class="modal-default-button delete" @click="playerToDelete = {}">No</button>
+          <button class="modal-default-button" @click="deletePlayer()">Yes</button>
+      </template>
+  </modal>
 </template>
-    
+  
 <script>
-    import TableTemplate from "../../components/Table.vue"
-    import Modal from "../../components/Modal.vue"
-    
-    export default {
-      components: {
-        TableTemplate,
-        Modal
+  import TableTemplate from "../../components/Table.vue"
+  import Modal from "../../components/Modal.vue"
+  import PlayerDetails from "../../components/PlayerDetails.vue"
+  
+  export default {
+    components: {
+      TableTemplate,
+      Modal,
+      PlayerDetails
+    },
+    data() {
+      return {
+        players: [],
+        playerDetailId: 0,
+        playerToDelete: {}
+      };
+    },
+    async created() {
+      this.players = await (await fetch("http://localhost:8080/players")).json();
+    },
+    methods: {
+      async deletePlayer() {
+          fetch("http://localhost:8080/players/" + this.playerToDelete.id, {
+              method: "delete",
+          }).then(async (response) => {
+              if (response.status == 204) {
+                  this.players.splice(this.players.indexOf(this.playerToDelete), 1);
+                  this.playerToDelete = {};
+              }
+          });
       },
-      data() {
-        return {
-          players: [],
-          playerToDelete: {}
-        };
-      },
-      async created() {
-        this.players = await (await fetch("http://localhost:8080/players")).json();
-      },
-      methods: {
-        async deletePlayer() {
-            fetch("http://localhost:8080/players/" + this.playerToDelete.id, {
-                method: "delete",
-            }).then(async (response) => {
-                if (response.status == 204) {
-                    this.players.splice(this.players.indexOf(this.playerToDelete), 1);
-                    this.playerToDelete = {};
-                }
-            });
-        },
-      },
-    };
-    </script>
-    
-<style scoped>
+    },
+  };
+  </script>
+  
+  <style scoped>
   
   .player-table {
     padding: 1rem;
     max-width: 100%;
   }
-  
+
   .router {
     text-transform: uppercase;
     margin-top: 2rem;
     text-align: center;
   }
 
+  .delete {
+      background-color: red;
+  }
+  
   .logo {
     display: block;
     margin: 0 auto 2rem;
@@ -109,7 +121,7 @@
       place-items: center;
       padding-right: calc(var(--section-gap) / 2);
     }
-
+  
     .logo {
       margin: 0 2rem 0 0;
     }
@@ -123,8 +135,9 @@
     nav {
       text-align: left;
       font-size: 1rem;
+  
       padding: 1rem 0;
       margin-top: 1rem;
     }
   }
-  </style>
+</style>  
