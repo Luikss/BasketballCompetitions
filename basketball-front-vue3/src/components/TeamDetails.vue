@@ -6,8 +6,9 @@
             </template>
             <template #body>
                 <b>Home court: </b>{{ currentTeam.homeCourt }}
+                <b v-if="!currentTeam.homeCourt">None</b>
                 <br><br>
-                <b v-if="players">Players:</b>
+                <b v-if="players.length > 0">Players:</b>
                 <div v-for="player in players" :key="player.id">
                     <b>{{ player.firstName }} {{ player.lastName }}</b>
                 </div>

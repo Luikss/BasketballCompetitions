@@ -6,7 +6,9 @@
       </template>
       <template #body>
         <b>Name: </b>{{ currentGame.name }}<br>
-        <b>Location: </b>{{ currentGame.location }}<br><br>
+        <b>Location: </b>{{ currentGame.location }}
+        <b v-if="!currentGame.location">Unknown</b>
+        <br><br>
         {{ currentGame.teamOneName }} 
         ({{ currentGame.teamOneScore }} - {{ currentGame.teamTwoScore }}) 
         {{ currentGame.teamTwoName }}
