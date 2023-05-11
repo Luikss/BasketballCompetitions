@@ -9,6 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/">Games</RouterLink>
+        <RouterLink to="/teams">Teams</RouterLink>
         <RouterLink to="/players">Players</RouterLink>
       </nav>
     </div>
