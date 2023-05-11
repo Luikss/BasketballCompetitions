@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "start http://localhost:8080/docs/ & open http://localhost:8080/docs/ & xdg-open http://localhost:8080/docs/ & npx nodemon .",
+    "start": "start http://localhost:8080/docs/ & open http://localhost:8080/docs/ & xdg-open http://localhost:5173/ & start http://localhost:5173/ & open http://localhost:5173/ & xdg-open http://localhost:8080/docs/ & npx nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "nodemonConfig": {
