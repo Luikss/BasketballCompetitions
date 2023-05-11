@@ -51,7 +51,7 @@
         this.teams = await (await fetch("http://localhost:8080/teams")).json();
       },
       methods: {
-        async deleteTeams() {
+        async deleteTeam() {
             fetch("http://localhost:8080/teams/" + this.teamToDelete.id, {
                 method: "delete",
             }).then(async (response) => {
