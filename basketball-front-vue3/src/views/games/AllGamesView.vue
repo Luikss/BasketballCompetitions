@@ -1,6 +1,5 @@
 <template>
   <div>
-    <RouterLink to="/createGame">Create new game</RouterLink>
     <div class="game-table">
       <table-template
         caption="UPCOMING GAMES"
@@ -25,6 +24,9 @@
       :gameDetailId="gameDetailId"
       @close="gameDetailId = 0"> 
     </game-details>
+  </div>
+  <div class="router">
+    <RouterLink to="/createGame">Create new game</RouterLink>
   </div>
   <modal :show="JSON.stringify(gameToDelete) !== '{}'">
      <template #header>
@@ -91,13 +93,20 @@
   };
   </script>
   
-  <style scoped>
+<style scoped>
   
   .game-table {
     padding: 1rem;
     max-width: 100%;
   }
-  
+  .router {
+    text-transform: uppercase;
+    margin-top: 2rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
   .logo {
     display: block;
     margin: 0 auto 2rem;
@@ -156,5 +165,5 @@
       margin-top: 1rem;
     }
   }
-  </style>
+</style>
   
