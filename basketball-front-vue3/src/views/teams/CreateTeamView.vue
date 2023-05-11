@@ -1,0 +1,145 @@
+<template>
+    <div class="container">
+        <div v-if="error">{{ error }}</div>
+        <form @submit.prevent="formSubmitHandler">
+            <div class="row">
+                <div class="col-25">
+                    <label for="name">Name</label>
+                </div>
+                <div class="col-75">
+                    <input id="name" type="text" v-model="name" required />
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-25">
+                    <label for="homeCourt">Home Court</label>
+                </div>
+                <div class="col-75">
+                    <input id="homeCourt" type="text" v-model="homeCourt" />
+                </div>
+            </div>    
+            <br>
+            <div class="row">
+                <input type="submit" value="Create" />
+                <input type="button" value="Back" class="back" @click="goBack">
+            </div>
+        </form>
+    </div>
+</template>
+  
+<script>
+  const API_URL = "http://localhost:8080/teams"
+  
+  export default {
+    data() {
+      return {
+        name: "",
+        homeCourt: "",
+        error: null
+      };
+    },
+    methods: {
+      goBack() {
+        window.history.back();
+      },
+      formSubmitHandler() {
+          this.error = null
+          const newTeam = {
+              name: this.name,
+              homeCourt: this.homeCourt
+          }
+          fetch(API_URL, {
+              method: "post",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(newTeam)
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (!data.error) {
+                  this.$router.push("/teams")
+                  return
+              }
+              this.error = data.error
+          })
+          .catch(error => {
+              console.log(error)
+          })
+      }
+    }
+  }
+</script>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+    
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+    
+    input[type="button"],
+    input[type="submit"] {
+        background-color: #4d82c7;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+    
+    input[type="button"]:hover,
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    
+    input[type="button"] {
+        margin-right: 5px;
+    }
+    
+    .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+    
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+    
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+    
+    .row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    @media screen and (max-width: 600px) {
+        .col-25,
+        .col-75,
+        input[type="submit"] {
+        width: 100%;
+        margin-top: 0;
+        }
+    }
+</style>

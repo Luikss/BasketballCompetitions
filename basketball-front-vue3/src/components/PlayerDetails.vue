@@ -6,7 +6,9 @@
             </template>
             <template #body>
                 <b>First Name: </b>{{ currentPlayer.firstName }}<br>
-                <b>Last Name: </b>{{ currentPlayer.lastName }}<br>
+                <b>Last Name: </b>{{ currentPlayer.lastName }}
+                <b v-if="!currentPlayer.lastName">-</b>
+                <br>
                 <b>Age: </b>{{ currentPlayer.age }}<br>
                 <b>Team: </b>{{ this.teamName }}<br>
             </template>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <RouterLink to="/createTeam">Create new team</RouterLink>
         <div class="team-table">
             <table-template
                 caption="TEAMS"
