@@ -1,21 +1,23 @@
 <template>
-    <div>
-        <RouterLink to="/createTeam">Create new team</RouterLink>
-        <div class="team-table">
-            <table-template
-                caption="TEAMS"
-                notFound="No teams found!"
-                :items="teams"
-                :showControls="true"
-                @show="teamDetailId = $event.id"
-                @delete="teamToDelete = $event">
-            </table-template>
-        </div>
-        <team-details 
-            :teamDetailId="teamDetailId"
-            @close="teamDetailId = 0"> 
-        </team-details>
+  <div>
+    <div class="team-table">
+        <table-template
+            caption="TEAMS"
+            notFound="No teams found!"
+            :items="teams"
+            :showControls="true"
+            @show="teamDetailId = $event.id"
+            @delete="teamToDelete = $event">
+        </table-template>
     </div>
+    <div class="router">
+        <RouterLink to="/createTeam">Create new team</RouterLink>
+    </div>
+      <team-details 
+          :teamDetailId="teamDetailId"
+          @close="teamDetailId = 0"> 
+      </team-details>
+  </div>
     <modal :show="JSON.stringify(teamToDelete) !== '{}'">
         <template #header>
             <h3>Deleting team</h3>
@@ -66,75 +68,75 @@
     };
     </script>
     
-    <style scoped>
-    
+<style scoped>
+  .team-table {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  .router {
+    text-transform: uppercase;
+    margin-top: 2rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .delete {
+      background-color: red;
+  }
+  .logo {
+    display: block;
+    margin: 0 auto 2rem;
+  }
+  
+  nav {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  nav a.router-link-exact-active {
+    color: var(--color-text);
+  }
+  
+  nav a.router-link-exact-active:hover {
+    background-color: transparent;
+  }
+  
+  nav a {
+    display: inline-block;
+    padding: 0 1rem;
+    border-left: 1px solid var(--color-border);
+  }
+  
+  nav a:first-of-type {
+    border: 0;
+  }
+  
+  @media (min-width: 1024px) {
     header {
-      line-height: 1.5;
-      max-height: 100vh;
-    }
-    
-    .team-table {
-      padding: 1rem;
+      display: flex;
+      place-items: center;
+      padding-right: calc(var(--section-gap) / 2);
     }
 
-    .delete {
-        background-color: red;
-    }
-    
     .logo {
-      display: block;
-      margin: 0 auto 2rem;
+      margin: 0 2rem 0 0;
     }
-    
+  
+    header .wrapper {
+      display: flex;
+      place-items: flex-start;
+      flex-wrap: wrap;
+    }
+  
     nav {
-      width: 100%;
-      font-size: 12px;
-      text-align: center;
-      margin-top: 2rem;
+      text-align: left;
+      margin-left: -1rem;
+      font-size: 1rem;
+  
+      padding: 1rem 0;
+      margin-top: 1rem;
     }
-    
-    nav a.router-link-exact-active {
-      color: var(--color-text);
-    }
-    
-    nav a.router-link-exact-active:hover {
-      background-color: transparent;
-    }
-    
-    nav a {
-      display: inline-block;
-      padding: 0 1rem;
-      border-left: 1px solid var(--color-border);
-    }
-    
-    nav a:first-of-type {
-      border: 0;
-    }
-    
-    @media (min-width: 1024px) {
-      header {
-        display: flex;
-        place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
-      }
-    
-      .logo {
-        margin: 0 2rem 0 0;
-      }
-    
-      header .wrapper {
-        display: flex;
-        place-items: flex-start;
-        flex-wrap: wrap;
-      }
-    
-      nav {
-        text-align: left;
-        margin-left: -1rem;
-        font-size: 1rem;
-    
-        padding: 1rem 0;
-        margin-top: 1rem;
-      }
-    }
+  }
 </style>  

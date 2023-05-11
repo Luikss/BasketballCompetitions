@@ -68,7 +68,7 @@
   };
   </script>
   
-  <style scoped>
+<style scoped>
   
   .player-table {
     padding: 1rem;
@@ -79,6 +79,8 @@
     text-transform: uppercase;
     margin-top: 2rem;
     text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
   }
 
   .delete {
