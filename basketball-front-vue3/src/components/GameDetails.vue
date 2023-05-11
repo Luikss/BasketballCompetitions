@@ -9,9 +9,14 @@
         <b>Location: </b>{{ currentGame.location }}
         <b v-if="!currentGame.location">Unknown</b>
         <br><br>
-        {{ currentGame.teamOneName }} 
-        ({{ currentGame.teamOneScore }} - {{ currentGame.teamTwoScore }}) 
-        {{ currentGame.teamTwoName }}
+        <div v-if="currentGame.teamOneScore && currentGame.teamTwoScore">
+            {{ currentGame.teamOneName }} 
+            ({{ currentGame.teamOneScore }} - {{ currentGame.teamTwoScore }}) 
+            {{ currentGame.teamTwoName }}
+        </div>
+        <div v-if="!currentGame.teamOneScore && !currentGame.teamTwoScore">
+            {{ currentGame.teamOneName }} & {{ currentGame.teamTwoName }}
+        </div>
       </template>
     </modal>
     </Teleport>
